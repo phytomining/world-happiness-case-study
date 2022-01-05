@@ -39,10 +39,10 @@ spfrit = happy[happy["Country name"].isin(["Afghanistan","Italy","France", "Chin
 fig1 = px.line(spfrit, 
         x="year", 
         y="Life Ladder", 
-        color="Country name", 
-        text="Life Ladder",
+        color="Country name",
        title="Life score of countries across years")
 
+fig1.update_traces(mode='markers+lines')
 st.title("How different values within a country correlates to its happiness score")
 
 
@@ -52,8 +52,6 @@ fig2 = px.bar(spfrit,
        color="Country name",
        animation_frame = "year",
        barmode="group")
-
-
 
 happy_c = happy.corr().sort_values("Life Ladder", ascending = False)
 ladder_c = happy_c["Life Ladder"]
@@ -102,15 +100,27 @@ happy.groupby(["Country name"]).sum()
 if(option_country == ""):
     option_country = "a country"
 else:
-    fig7 = px.line(country, 
+    fig7 = px.line(country.loc[country["variable"] != "Healthy life expectancy at birth"], 
         x="year", 
         y="value", 
         color="variable", 
        title="Values of different life ladder factors in " + option_country,
-       labels={"variable":"Happiness factors"},
-       log_y=True)
+       labels={"variable":"Happiness factors"})
     fig7.update_traces(mode='markers+lines')
+    
+    fig7_1 = px.line(country.loc[country["variable"] == "Healthy life expectancy at birth"], 
+        x="year", 
+        y="value", 
+        color="variable", 
+       title="Most correlated factor: Healthy life expectancy in " + option_country,
+       labels={"variable":"Happiness factors"})
+    fig7_1.update_traces(mode='markers+lines')
+    
     st.plotly_chart(fig7)
+    st.plotly_chart(fig7_1)
+    
+    
+    #fig7_1["Healthy life expectancy at birth"]
 
         
 
