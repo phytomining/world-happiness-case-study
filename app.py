@@ -3,8 +3,6 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import matplotlib.pyplot as plt
-import geopandas as gpd
 import plotly.graph_objects as go
 import streamlit as st
 
@@ -18,8 +16,6 @@ happiness2021 = pd.read_csv("world-happiness-report-2021.csv")
 happiness = pd.read_csv("world-happiness-report.csv")
 
 countries_dict = [country for country in happiness["Country name"].unique() if country in happiness2021["Country name"].values]
-
-mapdata = gpd.read_file("custom.geo.json")
 
 happiness = happiness.loc[happiness["Country name"].isin(countries_dict)].reset_index(drop=True)
 
