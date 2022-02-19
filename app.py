@@ -14,8 +14,8 @@ st.sidebar.write('2. ','<a href=#interactive-scatter-graph>Scatter graph</a>', u
 st.sidebar.write('3. ','<a>Other graphs</a>', unsafe_allow_html=True)
 st.sidebar.write('4. ','<a>More graphs</a>', unsafe_allow_html=True)
 
-happiness2021 = pd.read_csv("C:\\Users\\r3ktmlg\\world-happiness-report-2021.csv")
-happiness = pd.read_csv("C:\\Users\\r3ktmlg\\world-happiness-report.csv")
+happiness2021 = pd.read_csv("world-happiness-report-2021.csv")
+happiness = pd.read_csv("world-happiness-report.csv")
 
 countries_dict = [country for country in happiness["Country name"].unique() if country in happiness2021["Country name"].values]
 
